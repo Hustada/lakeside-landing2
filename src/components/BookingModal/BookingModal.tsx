@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Modal, Box, IconButton } from '@mui/material';
+import { Modal, Box, IconButton, Typography, Paper } from '@mui/material';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BookingCalendar from '../BookingCalendar';
@@ -28,37 +28,108 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            p: 2,
           }}
         >
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ type: 'spring', damping: 15 }}
+            initial={{ 
+              scale: 0,
+              rotateX: -90,
+              y: 100,
+            }}
+            animate={{ 
+              scale: 1,
+              rotateX: 0,
+              y: 0,
+            }}
+            exit={{ 
+              scale: 0,
+              rotateX: 90,
+              y: -100,
+            }}
+            transition={{
+              type: 'spring',
+              damping: 20,
+              stiffness: 100,
+            }}
+            style={{
+              width: '100%',
+              maxWidth: '800px',
+              perspective: '1000px',
+            }}
           >
-            <Box
+            <Paper
+              elevation={24}
               sx={{
-                position: 'relative',
                 bgcolor: 'background.paper',
                 borderRadius: 2,
-                p: 4,
-                maxWidth: '90vw',
-                maxHeight: '90vh',
-                overflow: 'auto',
+                overflow: 'hidden',
+                position: 'relative',
               }}
             >
-              <IconButton
-                onClick={onClose}
+              {/* Header */}
+              <Box
                 sx={{
-                  position: 'absolute',
-                  right: 8,
-                  top: 8,
+                  p: 3,
+                  borderBottom: '1px solid',
+                  borderColor: 'divider',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  bgcolor: 'primary.main',
+                  color: 'white',
                 }}
               >
-                <X />
-              </IconButton>
-              <BookingCalendar onDateSelect={handleDateSelect} />
-            </Box>
+                <Typography variant="h5" component="h2">
+                  Book Your Lake Escape
+                </Typography>
+                <IconButton
+                  onClick={onClose}
+                  sx={{
+                    color: 'white',
+                    '&:hover': {
+                      bgcolor: 'primary.dark',
+                    },
+                  }}
+                >
+                  <X />
+                </IconButton>
+              </Box>
+
+              {/* Calendar Section */}
+              <Box sx={{ p: 4 }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <Typography variant="body1" sx={{ mb: 3, color: 'text.secondary' }}>
+                    Select your check-in and check-out dates to begin your lakeside adventure
+                  </Typography>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <Box sx={{ 
+                    '& .MuiTextField-root': { 
+                      width: '100%',
+                      mb: 2,
+                    },
+                    '& .MuiInputLabel-root': {
+                      fontSize: '1.1rem',
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      fontSize: '1.1rem',
+                    },
+                  }}>
+                    <BookingCalendar onDateSelect={handleDateSelect} />
+                  </Box>
+                </motion.div>
+              </Box>
+            </Paper>
           </motion.div>
         </Modal>
       )}
