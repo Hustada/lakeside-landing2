@@ -23,7 +23,7 @@ export default function Home() {
           justifyContent: 'center',
           bgcolor: 'grey.900',
           color: 'white',
-          backgroundImage: 'url(/hero-image.jpg)',
+          backgroundImage: 'url(/cabinaerial1.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           '&::before': {
@@ -33,7 +33,7 @@ export default function Home() {
             left: 0,
             right: 0,
             bottom: 0,
-            bgcolor: 'rgba(0,0,0,0.4)',
+            bgcolor: 'rgba(0,0,0,0.3)',
           },
         }}
       >
@@ -43,7 +43,17 @@ export default function Home() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Typography variant="h2" component="h1" sx={{ mb: 2 }}>
+            <Typography 
+              variant="h2" 
+              component="h1" 
+              sx={{ 
+                mb: 2,
+                color: '#FDFBF7',
+                textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                fontWeight: 500,
+                letterSpacing: '0.02em',
+              }}
+            >
               Lakeside Landing
             </Typography>
           </motion.div>
@@ -52,7 +62,16 @@ export default function Home() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Typography variant="h5" sx={{ mb: 4 }}>
+            <Typography 
+              variant="h5" 
+              sx={{ 
+                mb: 4,
+                color: '#D4C4B0',
+                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                fontWeight: 400,
+                letterSpacing: '0.01em',
+              }}
+            >
               Your private lake retreat in rural Nebraska
             </Typography>
           </motion.div>
@@ -67,10 +86,13 @@ export default function Home() {
               size="large"
               onClick={() => setBookingModalOpen(true)}
               sx={{
-                bgcolor: 'primary.main',
-                color: 'white',
+                bgcolor: '#8B6D47',
+                color: '#FDFBF7',
+                px: 4,
+                py: 1.5,
+                fontSize: '1.1rem',
                 '&:hover': {
-                  bgcolor: 'primary.dark',
+                  bgcolor: '#6B563C',
                 },
               }}
             >
