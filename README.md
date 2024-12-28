@@ -1,25 +1,24 @@
 # Lakeside Landing Booking Site
 
-A modern booking website for Lakeside Landing, a luxury lakefront property. Built with Next.js 14, Material UI, and TypeScript.
+A modern booking website for Lakeside Landing, a private lake retreat in rural Nebraska.
 
 ## Features
 
-- 🏠 Modern, responsive property showcase
-- 📅 Booking system integration
-- 💳 Secure payment processing with Stripe
-- 📱 Mobile-friendly design
-- 🎨 Material UI components
-- 🚀 Built on Next.js 14
+- Interactive booking calendar
+- Photo gallery with lightbox
+- Animated scroll sections
+- Responsive design
+- Material UI components
+- Next.js 14 App Router
 
 ## Tech Stack
 
-- **Framework:** Next.js 14
-- **UI Library:** Material UI
-- **Styling:** Emotion
-- **Language:** TypeScript
-- **Payment:** Stripe (coming soon)
-- **Forms:** React Hook Form
-- **Validation:** Zod
+- Next.js 14
+- TypeScript
+- Material UI
+- Framer Motion
+- date-fns
+- node-ical
 
 ## Getting Started
 
@@ -40,6 +39,39 @@ A modern booking website for Lakeside Landing, a luxury lakefront property. Buil
    ```
 
 4. **Open [http://localhost:3000](http://localhost:3000) to view the site**
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+NEXT_PUBLIC_AIRBNB_ICAL_URL=your_airbnb_ical_url
+```
+
+## Deployment
+
+This project is optimized for deployment on Vercel:
+
+1. Push your code to GitHub
+2. Import the project in Vercel
+3. Add the environment variables in Vercel's project settings
+4. Deploy!
 
 ## Project Structure
 
@@ -63,7 +95,7 @@ lakeside-landing2/
 
 ## License
 
-This project is private and proprietary. All rights reserved.
+MIT
 
 ## Contact
 

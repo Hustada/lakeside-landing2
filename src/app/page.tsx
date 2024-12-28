@@ -1,102 +1,202 @@
+'use client';
+
+import { useState } from 'react';
 import { Box, Container, Typography, Grid, Button, Paper } from '@mui/material';
-import { Calendar, MapPin, Users, Wifi } from 'lucide-react';
+import { TreePine as Tree, Fish, Car, HomeIcon, Sun, Users, Tv } from 'lucide-react';
+import { motion } from 'framer-motion';
+import BookingModal from '@/components/BookingModal/BookingModal';
+import PhotoGallery from '@/components/PhotoGallery';
+import ScrollSection from '@/components/ScrollSection/ScrollSection';
 
 export default function Home() {
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
+
   return (
     <Box>
       {/* Hero Section */}
       <Box
         sx={{
-          bgcolor: 'background.paper',
-          pt: 8,
-          pb: 6,
-          background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/hero-image.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: 'white',
-          minHeight: '80vh',
+          position: 'relative',
+          height: '80vh',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
+          bgcolor: 'grey.900',
+          color: 'white',
+          backgroundImage: 'url(/hero-image.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bgcolor: 'rgba(0,0,0,0.4)',
+          },
         }}
       >
-        <Container maxWidth="md">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            gutterBottom
-            sx={{ fontWeight: 'bold' }}
+        <Box sx={{ position: 'relative', textAlign: 'center' }}>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Lakeside Landing
-          </Typography>
-          <Typography variant="h5" align="center" paragraph>
-            Your perfect lakefront getaway in the heart of nature
-          </Typography>
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+            <Typography variant="h2" component="h1" sx={{ mb: 2 }}>
+              Lakeside Landing
+            </Typography>
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Typography variant="h5" sx={{ mb: 4 }}>
+              Your private lake retreat in rural Nebraska
+            </Typography>
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+          >
             <Button
               variant="contained"
               size="large"
-              startIcon={<Calendar />}
-              sx={{ px: 4, py: 1.5 }}
+              onClick={() => setBookingModalOpen(true)}
+              sx={{
+                bgcolor: 'primary.main',
+                color: 'white',
+                '&:hover': {
+                  bgcolor: 'primary.dark',
+                },
+              }}
             >
               Check Availability
             </Button>
-          </Box>
-        </Container>
+          </motion.div>
+        </Box>
       </Box>
 
-      {/* Quick Info Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Typography variant="h3" gutterBottom>
-              Welcome to Lakeside Landing
-            </Typography>
-            <Typography variant="body1" paragraph>
-              Experience the perfect blend of luxury and nature at our waterfront property. 
-              This stunning 3-bedroom retreat offers breathtaking lake views, modern amenities, 
-              and the perfect setting for your next vacation.
-            </Typography>
-            <Box sx={{ display: 'flex', gap: 3, mt: 4 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Users />
-                <Typography>Sleeps 8</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <MapPin />
-                <Typography>Lakefront</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Wifi />
-                <Typography>Fast WiFi</Typography>
-              </Box>
-            </Box>
+        {/* Property Description */}
+        <ScrollSection>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Welcome to Your Lake Escape
+          </Typography>
+          <Typography paragraph>
+            Experience the tranquility of rural Nebraska at our private 80-acre retreat. 
+            This stunning property features a serene private lake, perfect for fishing, 
+            boating, and creating lasting memories with family and friends.
+          </Typography>
+        </ScrollSection>
+
+        {/* Features */}
+        <ScrollSection delay={0.2}>
+          <Grid container spacing={4} sx={{ mt: 4 }}>
+            <Grid item xs={12} md={4}>
+              <Paper elevation={0} sx={{ p: 3, textAlign: 'center' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                  <HomeIcon size={32} />
+                </Box>
+                <Typography variant="h6" gutterBottom>
+                  Comfortable Living
+                </Typography>
+                <Typography>
+                  1200 sq ft of cozy space with a full kitchen, living room, and updated bathroom
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper elevation={0} sx={{ p: 3, textAlign: 'center' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                  <Users size={32} />
+                </Box>
+                <Typography variant="h6" gutterBottom>
+                  Sleeps 8
+                </Typography>
+                <Typography>
+                  3 bunk beds and a queen-sized bed to accommodate your group
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper elevation={0} sx={{ p: 3, textAlign: 'center' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                  <Fish size={32} />
+                </Box>
+                <Typography variant="h6" gutterBottom>
+                  Private Lake
+                </Typography>
+                <Typography>
+                  Fish, boat, or kayak on your own private lake
+                </Typography>
+              </Paper>
+            </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper elevation={3} sx={{ p: 3, bgcolor: 'background.paper', borderRadius: 2 }}>
-              <Typography variant="h5" gutterBottom>
-                Quick Highlights
+        </ScrollSection>
+
+        {/* Photo Gallery */}
+        <ScrollSection delay={0.4}>
+          <Typography variant="h4" component="h2" sx={{ mt: 8, mb: 4 }}>
+            Photo Gallery
+          </Typography>
+          <PhotoGallery />
+        </ScrollSection>
+
+        {/* Wildlife Section */}
+        <ScrollSection delay={0.6}>
+          <Typography variant="h4" component="h2" sx={{ mt: 8, mb: 4 }}>
+            Local Wildlife
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" gutterBottom>
+                Lake Life
               </Typography>
-              <Grid container spacing={2}>
-                {[
-                  '3 Bedrooms / 2 Bathrooms',
-                  'Private Dock',
-                  'Full Kitchen',
-                  'Outdoor Fire Pit',
-                  'Smart TV',
-                  'Lake Views',
-                  'Central Air',
-                  'Parking for 4 Cars'
-                ].map((feature, index) => (
-                  <Grid item xs={6} key={index}>
-                    <Typography variant="body1">• {feature}</Typography>
-                  </Grid>
-                ))}
-              </Grid>
-            </Paper>
+              <Typography paragraph>
+                Our private lake is home to various fish species including Bass and Bluegill,
+                perfect for fishing enthusiasts of all skill levels.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" gutterBottom>
+                Land Animals
+              </Typography>
+              <Typography paragraph>
+                The property attracts diverse wildlife including Wild Turkeys and White-tailed Deer,
+                offering excellent opportunities for nature observation.
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
+        </ScrollSection>
+
+        {/* Important Notes */}
+        <ScrollSection delay={0.8}>
+          <Typography variant="h4" component="h2" sx={{ mt: 8, mb: 4 }}>
+            Important Notes
+          </Typography>
+          <Typography paragraph>
+            • The cabin is equipped with strong WiFi and a smart TV for your entertainment needs
+          </Typography>
+          <Typography paragraph>
+            • Boats and kayaks are available for guest use
+          </Typography>
+          <Typography paragraph>
+            • Please observe safety guidelines around the lake
+          </Typography>
+          <Typography paragraph>
+            • Check-in instructions and gate access code will be provided upon booking
+          </Typography>
+        </ScrollSection>
       </Container>
+
+      <BookingModal
+        open={bookingModalOpen}
+        onClose={() => setBookingModalOpen(false)}
+      />
     </Box>
   );
 }
