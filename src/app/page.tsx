@@ -8,6 +8,7 @@ import BookingModal from '@/components/BookingModal/BookingModal';
 import PhotoGallery from '@/components/PhotoGallery';
 import ScrollSection from '@/components/ScrollSection/ScrollSection';
 import HeroTitle from '@/components/Hero/HeroTitle';
+import Reviews from '@/components/Reviews/Reviews';
 
 export default function Home() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -159,35 +160,43 @@ export default function Home() {
           }
         }}
       >
-        {/* Property Description */}
+        {/* Welcome Section */}
         <ScrollSection>
-          <Typography 
-            variant="h4" 
-            component="h2" 
-            gutterBottom
-            sx={{ 
-              mb: 3,
-              textAlign: { xs: 'center', md: 'left' }
-            }}
-          >
-            Welcome to Your Lake Escape
-          </Typography>
-          <Typography 
-            paragraph
+          <Box
             sx={{
-              fontSize: '1.1rem',
-              lineHeight: 1.8,
-              maxWidth: '800px'
+              textAlign: 'center',
+              maxWidth: '800px',
+              mx: 'auto',
+              mb: 8,
             }}
           >
-            Experience the tranquility of rural Nebraska at our private 80-acre retreat. 
-            This stunning property features a serene private lake, perfect for fishing, 
-            boating, and creating lasting memories with family and friends.
-          </Typography>
-        </ScrollSection>
+            <Typography
+              variant="h4"
+              component="h2"
+              gutterBottom
+              sx={{
+                fontFamily: '"Cabin Sketch", cursive',
+                color: '#6B563C',
+                mb: 3,
+                textShadow: '1px 1px 0 rgba(107, 86, 60, 0.1)',
+              }}
+            >
+              Welcome to Your Lake Escape
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                color: '#2C1810',
+              }}
+            >
+              Experience the tranquility of rural Nebraska at our private 80-acre retreat. 
+              This stunning property features a serene private lake, perfect for fishing, 
+              boating, and creating lasting memories with family and friends.
+            </Typography>
+          </Box>
 
-        {/* Features */}
-        <ScrollSection delay={0.2}>
+          {/* Features Cards */}
           <Grid container spacing={4} sx={{ mt: 4 }}>
             <Grid item xs={12} md={4}>
               <Paper 
@@ -265,7 +274,7 @@ export default function Home() {
         </ScrollSection>
 
         {/* Photo Gallery */}
-        <ScrollSection delay={0.4}>
+        <ScrollSection delay={0.2}>
           <Typography 
             variant="h4" 
             component="h2" 
@@ -281,7 +290,7 @@ export default function Home() {
         </ScrollSection>
 
         {/* Wildlife Section */}
-        <ScrollSection delay={0.6}>
+        <ScrollSection delay={0.4}>
           <Typography 
             variant="h4" 
             component="h2" 
@@ -329,59 +338,124 @@ export default function Home() {
           </Grid>
         </ScrollSection>
 
-        {/* Important Notes */}
+        {/* Important Notes Section */}
+        <ScrollSection delay={0.6}>
+          <Box
+            sx={{
+              mt: 12,
+              p: 4,
+              borderRadius: 4,
+              position: 'relative',
+              bgcolor: 'rgba(139, 109, 71, 0.05)',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: -20,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 40,
+                height: 40,
+                bgcolor: '#8B6D47',
+                clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+              },
+            }}
+          >
+            <Typography
+              variant="h5"
+              component="h3"
+              align="center"
+              gutterBottom
+              sx={{
+                fontFamily: '"Cabin Sketch", cursive',
+                color: '#6B563C',
+                mb: 4,
+              }}
+            >
+              Important Notes
+            </Typography>
+            <Grid container spacing={3} justifyContent="center">
+              <Grid item xs={12} md={4}>
+                <Box
+                  sx={{
+                    p: 3,
+                    bgcolor: 'white',
+                    borderRadius: 2,
+                    height: '100%',
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{ color: '#8B6D47' }}
+                  >
+                    Check-in Details
+                  </Typography>
+                  <Typography>
+                    Check-in is at 3 PM and check-out is at 11 AM. Early check-in may be available upon request.
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box
+                  sx={{
+                    p: 3,
+                    bgcolor: 'white',
+                    borderRadius: 2,
+                    height: '100%',
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{ color: '#8B6D47' }}
+                  >
+                    What to Bring
+                  </Typography>
+                  <Typography>
+                    We provide basic amenities, but bring your own fishing gear, water toys, and any special items you need.
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Box
+                  sx={{
+                    p: 3,
+                    bgcolor: 'white',
+                    borderRadius: 2,
+                    height: '100%',
+                    transition: 'transform 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    gutterBottom
+                    sx={{ color: '#8B6D47' }}
+                  >
+                    House Rules
+                  </Typography>
+                  <Typography>
+                    No smoking inside. Pets are welcome with prior approval. Please respect quiet hours from 10 PM to 7 AM.
+                  </Typography>
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </ScrollSection>
+
+        {/* Reviews Section */}
         <ScrollSection delay={0.8}>
-          <Typography 
-            variant="h4" 
-            component="h2" 
-            gutterBottom
-            sx={{ 
-              mb: 3,
-              textAlign: { xs: 'center', md: 'left' }
-            }}
-          >
-            Important Notes
-          </Typography>
-          <Typography 
-            paragraph
-            sx={{
-              fontSize: '1.1rem',
-              lineHeight: 1.8,
-              maxWidth: '800px'
-            }}
-          >
-            • The cabin is equipped with strong WiFi and a smart TV for your entertainment needs
-          </Typography>
-          <Typography 
-            paragraph
-            sx={{
-              fontSize: '1.1rem',
-              lineHeight: 1.8,
-              maxWidth: '800px'
-            }}
-          >
-            • Boats and kayaks are available for guest use
-          </Typography>
-          <Typography 
-            paragraph
-            sx={{
-              fontSize: '1.1rem',
-              lineHeight: 1.8,
-              maxWidth: '800px'
-            }}
-          >
-            • Please observe safety guidelines around the lake
-          </Typography>
-          <Typography 
-            paragraph
-            sx={{
-              fontSize: '1.1rem',
-              lineHeight: 1.8,
-              maxWidth: '800px'
-            }}
-          >
-            • Check-in instructions and gate access code will be provided upon booking
-          </Typography>
+          <Reviews />
         </ScrollSection>
       </Container>
 

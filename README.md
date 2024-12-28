@@ -85,6 +85,27 @@ lakeside-landing2/
 └── package.json         # Project dependencies
 ```
 
+## Recent Updates
+
+### Reviews Section
+- Added a new guestbook-style reviews section with handwritten aesthetics
+- Implemented smooth transitions between reviews
+- Used Caveat font for handwritten appearance
+- Created notebook paper styling with lined background
+- Added navigation arrows and indicator dots
+
+### Hero Section
+- Enhanced hero title with rustic, woodsy design
+- Added Cabin Sketch font for cabin-like appearance
+- Implemented decorative pine tree elements
+- Added wood grain texture overlay
+- Improved text shadows and color scheme
+
+### Photo Gallery
+- Enhanced navigation with arrow key support
+- Added modal transitions
+- Improved mobile responsiveness
+
 ## Contributing
 
 1. Fork the repository
