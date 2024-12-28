@@ -7,122 +7,124 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import BookingModal from '@/components/BookingModal/BookingModal';
 import PhotoGallery from '@/components/PhotoGallery';
 import ScrollSection from '@/components/ScrollSection/ScrollSection';
+import HeroTitle from '@/components/Hero/HeroTitle';
 
 export default function Home() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+
+  // Parallax effect
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], ['0%', '20%']);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0.3]);
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 200], [1, 0.5]);
 
   return (
     <Box>
       {/* Hero Section */}
-      <Box
-        sx={{
-          position: 'relative',
-          height: '80vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          bgcolor: 'grey.900',
-          color: 'white',
-          overflow: 'hidden', // Important for parallax
-        }}
-      >
-        <motion.div
-          style={{
+      <Box sx={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        {/* Hero Background */}
+        <Box
+          sx={{
             position: 'absolute',
-            width: '100%',
-            height: '100%',
-            y,
-            opacity,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)',
+              zIndex: 1,
+            },
           }}
         >
-          <Box
-            sx={{
+          <motion.div
+            style={{
               position: 'absolute',
               width: '100%',
               height: '120%', // Extra height for movement
               top: '-10%', // Start slightly above
-              backgroundImage: 'url(/cabinaerial1.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                bgcolor: 'rgba(0,0,0,0.3)',
-              },
+              y,
+              opacity,
             }}
-          />
-        </motion.div>
+          >
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                backgroundImage: 'url(/cabinaerial1.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+          </motion.div>
+        </Box>
 
-        <Box sx={{ position: 'relative', textAlign: 'center', zIndex: 1 }}>
+        {/* Hero Content */}
+        <Container
+          maxWidth="lg"
+          sx={{
+            position: 'relative',
+            zIndex: 2,
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            color: 'white',
+          }}
+        >
+          <HeroTitle />
+          
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.8 }}
           >
-            <Typography 
-              variant="h2" 
-              component="h1" 
-              sx={{ 
-                mb: 2,
-                color: '#FDFBF7',
-                textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                fontWeight: 500,
-                letterSpacing: '0.02em',
+            <Typography
+              variant="h5"
+              sx={{
+                mt: 4,
+                maxWidth: '600px',
+                mx: 'auto',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
               }}
             >
-              Lakeside Landing
+              Experience tranquility at our private lake retreat
             </Typography>
           </motion.div>
+
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Typography 
-              variant="h5" 
-              sx={{ 
-                mb: 4,
-                color: '#D4C4B0',
-                textShadow: '0 1px 2px rgba(0,0,0,0.3)',
-                fontWeight: 400,
-                letterSpacing: '0.01em',
-              }}
-            >
-              Your private lake retreat in rural Nebraska
-            </Typography>
-          </motion.div>
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
           >
             <Button
               variant="contained"
               size="large"
               onClick={() => setBookingModalOpen(true)}
               sx={{
-                bgcolor: '#8B6D47',
-                color: '#FDFBF7',
+                mt: 4,
                 px: 4,
                 py: 1.5,
+                borderRadius: 2,
+                textTransform: 'none',
                 fontSize: '1.1rem',
+                backgroundColor: 'rgba(255,255,255,0.9)',
+                color: 'text.primary',
                 '&:hover': {
-                  bgcolor: '#6B563C',
+                  backgroundColor: 'white',
                 },
               }}
             >
-              Check Availability
+              Book Your Stay
             </Button>
           </motion.div>
-        </Box>
+        </Container>
       </Box>
 
       <Container 
