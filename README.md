@@ -1,123 +1,36 @@
-# Lakeside Landing Booking Site
+# Lakeside Landing
 
-A modern booking website for Lakeside Landing, a private lake retreat in rural Nebraska.
+A modern, rustic-themed booking website for a lakeside retreat, built with Next.js and Material-UI.
+
+![Lakeside Landing Screenshot](public/readmescreenshot.png)
 
 ## Features
 
-- Interactive booking calendar
-- Photo gallery with lightbox
-- Animated scroll sections
-- Responsive design
-- Material UI components
-- Next.js 14 App Router
+- Beautiful, responsive design with rustic theme
+- Interactive photo gallery with categorized images
+- Animated booking calendar
+- Contact form with engaging campfire animation
+- Modern UI components with smooth transitions
+- Mobile-friendly layout
 
 ## Tech Stack
 
 - Next.js 14
 - TypeScript
-- Material UI
+- Material-UI
 - Framer Motion
-- date-fns
-- node-ical
-
-## Getting Started
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Hustada/lakeside-landing2.git
-   cd lakeside-landing2
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open [http://localhost:3000](http://localhost:3000) to view the site**
+- Lucide Icons
 
 ## Development
 
+First, run the development server:
+
 ```bash
-# Install dependencies
-npm install
-
-# Run development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
 ```
 
-## Environment Variables
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Create a `.env` file in the root directory with the following variables:
+## Built With ❤️ By
 
-```
-NEXT_PUBLIC_AIRBNB_ICAL_URL=your_airbnb_ical_url
-```
-
-## Deployment
-
-This project is optimized for deployment on Vercel:
-
-1. Push your code to GitHub
-2. Import the project in Vercel
-3. Add the environment variables in Vercel's project settings
-4. Deploy!
-
-## Project Structure
-
-```
-lakeside-landing2/
-├── src/
-│   ├── app/              # Next.js app directory
-│   ├── components/       # React components
-│   └── theme.ts         # Material UI theme configuration
-├── public/              # Static assets
-└── package.json         # Project dependencies
-```
-
-## Recent Updates
-
-### Reviews Section
-- Added a new guestbook-style reviews section with handwritten aesthetics
-- Implemented smooth transitions between reviews
-- Used Caveat font for handwritten appearance
-- Created notebook paper styling with lined background
-- Added navigation arrows and indicator dots
-
-### Hero Section
-- Enhanced hero title with rustic, woodsy design
-- Added Cabin Sketch font for cabin-like appearance
-- Implemented decorative pine tree elements
-- Added wood grain texture overlay
-- Improved text shadows and color scheme
-
-### Photo Gallery
-- Enhanced navigation with arrow key support
-- Added modal transitions
-- Improved mobile responsiveness
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-MIT
-
-## Contact
-
-Mark Hustad - Project Owner
+[The Victor Collective](https://thevictorcollective.com)
