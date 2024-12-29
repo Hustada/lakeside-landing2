@@ -97,6 +97,7 @@ export default function PhotoGallery() {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [direction, setDirection] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -117,6 +118,32 @@ export default function PhotoGallery() {
       setSelectedImg(allPhotos[currentIndex - 1].img);
     }
   }, [currentIndex]);
+
+  // Touch handlers for swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStart) return;
+
+    const touchEnd = e.touches[0].clientX;
+    const diff = touchStart - touchEnd;
+
+    // Require at least 50px movement for a swipe
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        showNext();
+      } else {
+        showPrev();
+      }
+      setTouchStart(0);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setTouchStart(0);
+  };
 
   // Keyboard navigation
   useEffect(() => {
@@ -200,8 +227,8 @@ export default function PhotoGallery() {
                 <ImageList
                   // Switch to standard grid for more predictable layout
                   variant="standard"
-                  cols={isMobile ? 2 : 3}
-                  gap={16}
+                  cols={isMobile ? 1 : 3}
+                  gap={isMobile ? 8 : 16}
                   sx={{
                     '& .MuiImageListItem-root': {
                       overflow: 'hidden',
@@ -222,7 +249,11 @@ export default function PhotoGallery() {
                         transition: 'transform 0.3s ease-in-out',
                       },
                       '&:hover img': {
-                        transform: 'scale(1.05)',
+                        transform: isMobile ? 'none' : 'scale(1.05)',
+                      },
+                      // Improve tap target size on mobile
+                      '&:active': {
+                        opacity: isMobile ? 0.8 : 1,
                       },
                     },
                   }}
@@ -368,6 +399,9 @@ export default function PhotoGallery() {
                   objectFit: 'contain',
                   borderRadius: '8px',
                 }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
                 onClick={(e) => e.stopPropagation()}
               />
             </Box>
