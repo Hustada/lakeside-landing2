@@ -280,12 +280,17 @@ export default function Home() {
         {/* Photo Gallery */}
         <ScrollSection delay={0.2}>
           <Typography 
-            variant="h4" 
+            variant="h2" 
             component="h2" 
             gutterBottom
             sx={{ 
               mb: 3,
-              textAlign: { xs: 'center', md: 'left' }
+              textAlign: 'center',
+              fontFamily: '"Cabin Sketch", cursive',
+              fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
+              fontWeight: 700,
+              color: '#2C1810',
+              textShadow: '2px 2px 0 rgba(107, 86, 60, 0.6)'
             }}
           >
             Photo Gallery
@@ -296,12 +301,17 @@ export default function Home() {
         {/* Wildlife Section */}
         <ScrollSection delay={0.4}>
           <Typography 
-            variant="h4" 
+            variant="h2" 
             component="h2" 
             gutterBottom
             sx={{ 
               mb: 3,
-              textAlign: { xs: 'center', md: 'left' }
+              textAlign: 'center',
+              fontFamily: '"Cabin Sketch", cursive',
+              fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
+              fontWeight: 700,
+              color: '#2C1810',
+              textShadow: '2px 2px 0 rgba(107, 86, 60, 0.6)'
             }}
           >
             Local Wildlife
