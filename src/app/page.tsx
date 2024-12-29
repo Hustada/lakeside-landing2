@@ -84,24 +84,6 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-          >
-            <Typography
-              variant="h5"
-              sx={{
-                mt: 4,
-                maxWidth: '600px',
-                mx: 'auto',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
-              }}
-            >
-              Experience tranquility at our private lake retreat
-            </Typography>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
             <Button
@@ -109,17 +91,45 @@ export default function Home() {
               size="large"
               onClick={() => setBookingModalOpen(true)}
               sx={{
-                mt: 4,
-                px: 4,
-                py: 1.5,
-                borderRadius: 2,
+                mt: 6,
+                px: 6,
+                py: 2,
+                borderRadius: '28px',
                 textTransform: 'none',
-                fontSize: '1.1rem',
-                backgroundColor: 'rgba(255,255,255,0.9)',
-                color: 'text.primary',
-                '&:hover': {
-                  backgroundColor: 'white',
+                fontSize: { xs: '1.1rem', md: '1.3rem' },
+                fontFamily: '"Cabin Sketch", cursive',
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                backgroundColor: '#8B6D47',
+                color: '#FDFBF7',
+                border: '2px solid #FDFBF7',
+                boxShadow: '4px 4px 0px #6B563C, 8px 8px 16px rgba(0,0,0,0.3)',
+                position: 'relative',
+                transition: 'all 0.3s ease',
+                overflow: 'visible',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: -2,
+                  left: -2,
+                  right: -2,
+                  bottom: -2,
+                  border: '2px solid rgba(255,255,255,0.2)',
+                  borderRadius: '30px',
+                  transition: 'all 0.3s ease',
                 },
+                '&:hover': {
+                  backgroundColor: '#6B563C',
+                  transform: 'translate(2px, 2px)',
+                  boxShadow: '2px 2px 0px #6B563C, 4px 4px 8px rgba(0,0,0,0.3)',
+                  '&::before': {
+                    transform: 'translate(-4px, -4px)',
+                  }
+                },
+                '&:active': {
+                  transform: 'translate(4px, 4px)',
+                  boxShadow: '0px 0px 0px #6B563C, 2px 2px 4px rgba(0,0,0,0.3)',
+                }
               }}
             >
               Book Your Stay
