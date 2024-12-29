@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Box, Typography, Container, CircularProgress } from '@mui/material';
+import { Box, Typography, Container, CircularProgress, Button } from '@mui/material';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const CampingAnimation = () => {
   return (
@@ -270,6 +271,34 @@ export default function BookingSuccess() {
               </Typography>
             </Box>
           )}
+          
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            <Link href="/" passHref style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 4,
+                  bgcolor: '#2C1810',
+                  color: 'white',
+                  '&:hover': {
+                    bgcolor: '#3D261C',
+                  },
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: 2,
+                  fontFamily: '"Cabin", sans-serif',
+                  textTransform: 'none',
+                  fontSize: '1.1rem',
+                }}
+              >
+                Return Home
+              </Button>
+            </Link>
+          </motion.div>
         </motion.div>
       </Box>
     </Container>
