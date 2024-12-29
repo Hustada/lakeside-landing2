@@ -42,10 +42,6 @@ export default function ContactForm() {
         email: '',
         message: ''
       });
-      
-      setTimeout(() => {
-        setShowAnimation(false);
-      }, 3000);
     } catch (err) {
       setError('Failed to send message. Please try again later.');
       console.error('EmailJS error:', err);
