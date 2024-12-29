@@ -164,11 +164,21 @@ export default function ContactForm() {
                   sx={{
                     fontFamily: '"Cabin Sketch", cursive',
                     color: '#6B563C',
-                    mb: 4,
-                    textShadow: '2px 2px 0 rgba(107, 86, 60, 0.1)',
+                    mb: 2,
                   }}
                 >
                   Get in Touch
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  align="center"
+                  sx={{
+                    mb: 4,
+                    color: '#6B563C',
+                    fontFamily: 'Cabin, sans-serif',
+                  }}
+                >
+                  Let&apos;s start planning your perfect lakeside getaway
                 </Typography>
 
                 <form onSubmit={handleSubmit}>
