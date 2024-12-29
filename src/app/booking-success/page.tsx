@@ -6,6 +6,11 @@ import { Box, Typography, Container, CircularProgress, Button } from '@mui/mater
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+interface BookingDetails {
+  startDate: string;
+  endDate: string;
+}
+
 const CampingAnimation = () => {
   return (
     <Box 
@@ -187,7 +192,7 @@ const CampingAnimation = () => {
 
 export default function BookingSuccess() {
   const [isLoading, setIsLoading] = useState(true);
-  const [bookingDetails, setBookingDetails] = useState<any>(null);
+  const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
 
@@ -261,7 +266,7 @@ export default function BookingSuccess() {
             Thank you for choosing Lakeside Landing!
           </Typography>
           <Typography color="text.secondary">
-            We've sent a confirmation email with all the details.
+            We&apos;ve sent a confirmation email with all the details.
           </Typography>
           {bookingDetails && (
             <Box sx={{ mt: 4 }}>
