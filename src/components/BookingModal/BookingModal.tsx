@@ -27,7 +27,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            p: 2,
+            p: { xs: 0, sm: 2 },
           }}
         >
           <motion.div
@@ -53,6 +53,7 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
             }}
             style={{
               width: '100%',
+              height: '100%',
               maxWidth: '800px',
               perspective: '1000px',
             }}
@@ -61,15 +62,18 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
               elevation={24}
               sx={{
                 bgcolor: 'background.paper',
-                borderRadius: 2,
+                borderRadius: { xs: 0, sm: 2 },
                 overflow: 'hidden',
                 position: 'relative',
+                height: { xs: '100vh', sm: 'auto' },
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
               {/* Header */}
               <Box
                 sx={{
-                  p: 3,
+                  p: { xs: 2, sm: 3 },
                   borderBottom: '1px solid',
                   borderColor: 'divider',
                   display: 'flex',
@@ -79,7 +83,13 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
                   color: 'white',
                 }}
               >
-                <Typography variant="h5" component="h2">
+                <Typography 
+                  variant="h5" 
+                  component="h2"
+                  sx={{
+                    fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                  }}
+                >
                   Book Your Lake Escape
                 </Typography>
                 <IconButton
@@ -96,7 +106,12 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
               </Box>
 
               {/* Calendar Section */}
-              <Box sx={{ p: 4 }}>
+              <Box sx={{ 
+                p: { xs: 2, sm: 4 },
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+              }}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

@@ -34,16 +34,21 @@ export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) 
         width: '100%', 
         maxWidth: '800px',
         margin: '0 auto',
+        height: { xs: '100%', sm: 'auto' },
+        display: 'flex',
+        flexDirection: 'column',
       }}>
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
+          style={{ flex: 1 }}
         >
           <Box sx={{ 
             display: 'flex', 
-            gap: 4,
-            flexDirection: { xs: 'column', sm: 'row' }
+            gap: { xs: 2, sm: 4 },
+            flexDirection: { xs: 'column', sm: 'row' },
+            mb: { xs: 2, sm: 4 },
           }}>
             <DatePicker
               label="Check-in Date"
@@ -53,9 +58,9 @@ export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) 
               sx={{
                 width: '100%',
                 '& .MuiOutlinedInput-root': {
-                  fontSize: '1.2rem',
+                  fontSize: { xs: '1rem', sm: '1.2rem' },
                   '& input': {
-                    padding: '16px',
+                    padding: { xs: '12px', sm: '16px' },
                     cursor: 'pointer',
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
@@ -66,7 +71,7 @@ export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) 
                   },
                 },
                 '& .MuiInputLabel-root': {
-                  fontSize: '1.1rem',
+                  fontSize: { xs: '1rem', sm: '1.1rem' },
                   color: 'primary.main',
                   '&.Mui-focused': {
                     color: 'primary.dark'
@@ -83,9 +88,9 @@ export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) 
               sx={{
                 width: '100%',
                 '& .MuiOutlinedInput-root': {
-                  fontSize: '1.2rem',
+                  fontSize: { xs: '1rem', sm: '1.2rem' },
                   '& input': {
-                    padding: '16px',
+                    padding: { xs: '12px', sm: '16px' },
                     cursor: 'pointer',
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
@@ -96,7 +101,7 @@ export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) 
                   },
                 },
                 '& .MuiInputLabel-root': {
-                  fontSize: '1.1rem',
+                  fontSize: { xs: '1rem', sm: '1.1rem' },
                   color: 'primary.main',
                   '&.Mui-focused': {
                     color: 'primary.dark'

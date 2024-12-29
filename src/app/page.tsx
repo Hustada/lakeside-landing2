@@ -95,11 +95,12 @@ export default function Home() {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: { xs: 'flex-end', sm: 'center' },
+            justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
             color: 'white',
-            pb: { xs: 12, sm: 0 },
+            pt: { xs: 0, sm: 0 },
+            pb: { xs: 0, sm: 0 },
           }}
         >
           <HeroTitle />
@@ -114,7 +115,7 @@ export default function Home() {
               size="large"
               onClick={() => setBookingModalOpen(true)}
               sx={{
-                mt: { xs: 3, sm: 6 },
+                mt: { xs: 4, sm: 6 },
                 px: { xs: 4, sm: 6 },
                 py: { xs: 1.5, sm: 2 },
                 borderRadius: '28px',
