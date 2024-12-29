@@ -2,7 +2,7 @@
 
 A modern, rustic-themed booking website for a lakeside retreat, built with Next.js and Material-UI.
 
-![Lakeside Landing Screenshot](public/readmescreenshot.png)
+<img src="public/readmescreenshot.png" alt="Lakeside Landing Screenshot" width="100%">
 
 ## Features
 
