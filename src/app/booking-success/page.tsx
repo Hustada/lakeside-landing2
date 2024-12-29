@@ -228,6 +228,8 @@ export default function BookingSuccess() {
           minHeight: '80vh',
           textAlign: 'center',
           gap: 4,
+          pb: 8,
+          pt: 8,
         }}
       >
         <CampingAnimation />
