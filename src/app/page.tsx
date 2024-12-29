@@ -172,11 +172,11 @@ export default function Home() {
           }}
         >
           <HeroTitle />
-          <Box sx={{ mt: 4 }}>
+          <Box sx={{ mt: 2 }}>
             <Button
               onClick={() => setBookingModalOpen(true)}
               sx={{
-                mt: { xs: 4, sm: 6 },
+                mt: { xs: 2, sm: 4 },
                 px: { xs: 4, sm: 6 },
                 py: { xs: 1.5, sm: 2 },
                 borderRadius: '4px',
