@@ -70,22 +70,25 @@ export default function Footer() {
           </Stack>
 
           {/* Bottom Section */}
-          <Box
-            sx={{
-              pt: 3,
-              borderTop: 1,
-              borderColor: 'rgba(255,255,255,0.1)',
-              textAlign: 'center'
-            }}
-          >
+          <Box sx={{ textAlign: 'center', py: 3 }}>
             <Typography 
               variant="body2" 
+              color="text.secondary"
               sx={{ 
-                color: '#6B6560',
-                fontSize: '0.85rem'
+                fontFamily: 'Cabin, sans-serif',
+                '& a': {
+                  color: '#8B6D47',
+                  textDecoration: 'none',
+                  '&:hover': {
+                    textDecoration: 'underline',
+                  }
+                }
               }}
             >
-              {new Date().getFullYear()} Lakeside Landing. All rights reserved.
+              &copy; {new Date().getFullYear()} LakesideLanding. Forged by{' '}
+              <a href="https://thevictorcollective.com" target="_blank" rel="noopener noreferrer">
+                The Victor Collective
+              </a>
             </Typography>
           </Box>
         </Stack>
