@@ -118,45 +118,85 @@ export default function Home() {
                 mt: { xs: 4, sm: 6 },
                 px: { xs: 4, sm: 6 },
                 py: { xs: 1.5, sm: 2 },
-                borderRadius: '28px',
+                borderRadius: '4px',
                 textTransform: 'none',
                 fontSize: { xs: '1rem', sm: '1.1rem', md: '1.3rem' },
                 fontFamily: '"Cabin Sketch", cursive',
-                fontWeight: 700,
-                letterSpacing: '0.05em',
-                backgroundColor: '#8B6D47',
-                color: '#FDFBF7',
-                border: '2px solid #FDFBF7',
-                boxShadow: '4px 4px 0px #6B563C, 8px 8px 16px rgba(0,0,0,0.3)',
+                background: '#F4E9D7',
+                color: '#6B563C',
+                border: '1px solid #8B6D47',
                 position: 'relative',
+                overflow: 'hidden',
                 transition: 'all 0.3s ease',
-                overflow: 'visible',
+                boxShadow: '2px 2px 4px rgba(0,0,0,0.2)',
                 '&::before': {
                   content: '""',
                   position: 'absolute',
-                  top: -2,
-                  left: -2,
-                  right: -2,
-                  bottom: -2,
-                  border: '2px solid rgba(255,255,255,0.2)',
-                  borderRadius: '30px',
-                  transition: 'all 0.3s ease',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: `
+                    linear-gradient(
+                      135deg,
+                      rgba(139, 109, 71, 0.05) 25%,
+                      transparent 25%,
+                      transparent 50%,
+                      rgba(139, 109, 71, 0.05) 50%,
+                      rgba(139, 109, 71, 0.05) 75%,
+                      transparent 75%
+                    )
+                  `,
+                  backgroundSize: '8px 8px',
+                  opacity: 1,
+                  zIndex: 1,
+                },
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'linear-gradient(to right, rgba(139, 109, 71, 0.1), transparent, rgba(139, 109, 71, 0.1))',
+                  zIndex: 1,
+                },
+                '& .MuiButton-label': {
+                  position: 'relative',
+                  zIndex: 2,
                 },
                 '&:hover': {
-                  backgroundColor: '#6B563C',
-                  transform: 'translate(2px, 2px)',
-                  boxShadow: '2px 2px 0px #6B563C, 4px 4px 8px rgba(0,0,0,0.3)',
+                  background: '#EDE0C9',
+                  transform: 'translateY(1px)',
+                  boxShadow: '1px 1px 2px rgba(0,0,0,0.15)',
                   '&::before': {
-                    transform: 'translate(-4px, -4px)',
-                  }
+                    opacity: 0.8,
+                  },
                 },
                 '&:active': {
-                  transform: 'translate(4px, 4px)',
-                  boxShadow: '0px 0px 0px #6B563C, 2px 2px 4px rgba(0,0,0,0.3)',
-                }
+                  transform: 'translateY(2px)',
+                  boxShadow: '0px 0px 1px rgba(0,0,0,0.1)',
+                },
               }}
             >
-              Book Your Stay
+              <Box sx={{ 
+                position: 'relative', 
+                zIndex: 2,
+                fontWeight: 'bold',
+                letterSpacing: '0.05em',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+                '&::before, &::after': {
+                  content: '""',
+                  height: '1px',
+                  width: '12px',
+                  background: '#8B6D47',
+                  opacity: 0.6,
+                },
+              }}>
+                Book Your Stay
+              </Box>
             </Button>
           </motion.div>
         </Container>
