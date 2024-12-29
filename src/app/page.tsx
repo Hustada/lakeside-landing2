@@ -305,7 +305,7 @@ export default function Home() {
             component="h2" 
             gutterBottom
             sx={{ 
-              mb: 3,
+              mb: 4,
               textAlign: 'center',
               fontFamily: '"Cabin Sketch", cursive',
               fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
@@ -316,40 +316,141 @@ export default function Home() {
           >
             Local Wildlife
           </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>
-                Lake Life
-              </Typography>
-              <Typography 
-                paragraph
-                sx={{
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  maxWidth: '800px'
+          <Grid container spacing={4} sx={{ mb: 6 }}>
+            <Grid item xs={12} md={4}>
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 4,
+                  height: '100%',
+                  borderRadius: 2,
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'transform 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-8px)'
+                  }
                 }}
               >
-                Our private lake is home to various fish species including Bass and Bluegill,
-                perfect for fishing enthusiasts of all skill levels.
-              </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                  <Fish size={48} style={{ color: '#6B563C' }} />
+                  <Typography 
+                    variant="h5" 
+                    gutterBottom 
+                    sx={{ 
+                      fontFamily: '"Cabin Sketch", cursive',
+                      color: '#2C1810',
+                      textAlign: 'center'
+                    }}
+                  >
+                    Lake Life
+                  </Typography>
+                  <Typography sx={{ textAlign: 'center', color: '#6B563C' }}>
+                    • Largemouth Bass<br/>
+                    • Bluegill<br/>
+                    • Channel Catfish<br/>
+                    • Great Blue Herons<br/>
+                    • Wood Ducks
+                  </Typography>
+                </Box>
+              </Paper>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom>
-                Land Animals
-              </Typography>
-              <Typography 
-                paragraph
-                sx={{
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  maxWidth: '800px'
+            <Grid item xs={12} md={4}>
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 4,
+                  height: '100%',
+                  borderRadius: 2,
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'transform 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-8px)'
+                  }
                 }}
               >
-                The property attracts diverse wildlife including Wild Turkeys and White-tailed Deer,
-                offering excellent opportunities for nature observation.
-              </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6B563C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 15V7c0-2.2 1.8-4 4-4s4 1.8 4 4v8"/>
+                    <path d="M17 15H7l-4 6h18l-4-6z"/>
+                    <path d="M12 3v4"/>
+                  </svg>
+                  <Typography 
+                    variant="h5" 
+                    gutterBottom 
+                    sx={{ 
+                      fontFamily: '"Cabin Sketch", cursive',
+                      color: '#2C1810',
+                      textAlign: 'center'
+                    }}
+                  >
+                    Forest Friends
+                  </Typography>
+                  <Typography sx={{ textAlign: 'center', color: '#6B563C' }}>
+                    • White-tailed Deer<br/>
+                    • Wild Turkeys<br/>
+                    • Red Fox<br/>
+                    • Eastern Cottontails<br/>
+                    • Gray Squirrels
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 4,
+                  height: '100%',
+                  borderRadius: 2,
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'transform 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-8px)'
+                  }
+                }}
+              >
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6B563C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 1 7.92 12.446a9 9 0 1 1 -16.626 -8.874a7.5 7.5 0 0 1 8.313 -3.572z"/>
+                  </svg>
+                  <Typography 
+                    variant="h5" 
+                    gutterBottom 
+                    sx={{ 
+                      fontFamily: '"Cabin Sketch", cursive',
+                      color: '#2C1810',
+                      textAlign: 'center'
+                    }}
+                  >
+                    Feathered Friends
+                  </Typography>
+                  <Typography sx={{ textAlign: 'center', color: '#6B563C' }}>
+                    • Cardinals<br/>
+                    • Blue Jays<br/>
+                    • Chickadees<br/>
+                    • Woodpeckers<br/>
+                    • Goldfinches
+                  </Typography>
+                </Box>
+              </Paper>
             </Grid>
           </Grid>
+          <Box sx={{ textAlign: 'center', mt: 2 }}>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                fontStyle: 'italic',
+                color: '#6B563C',
+                maxWidth: '600px',
+                margin: '0 auto'
+              }}
+            >
+              Note: Wildlife sightings vary by season. Remember to observe from a safe distance and never feed wild animals.
+            </Typography>
+          </Box>
         </ScrollSection>
 
         {/* Important Notes Section */}
