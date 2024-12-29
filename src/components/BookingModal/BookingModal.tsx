@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { Modal, Box, IconButton, Typography, Paper } from '@mui/material';
+import { Box, Modal, IconButton, Typography, Paper } from '@mui/material';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BookingCalendar from '../BookingCalendar';

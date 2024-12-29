@@ -12,7 +12,6 @@ export default function ContactForm() {
     email: '',
     message: ''
   });
-  const [submitted, setSubmitted] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -254,7 +253,7 @@ export default function ContactForm() {
           </AnimatePresence>
 
           <AnimatePresence>
-            {submitted && (
+            {showAnimation && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
