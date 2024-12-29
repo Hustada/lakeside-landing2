@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Container, Typography, Grid, Button, Paper } from '@mui/material';
 import { Fish, HomeIcon, Users } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import BookingModal from '@/components/BookingModal/BookingModal';
 import PhotoGallery from '@/components/PhotoGallery';
 import ScrollSection from '@/components/ScrollSection/ScrollSection';
@@ -11,13 +11,63 @@ import HeroTitle from '@/components/Hero/HeroTitle';
 import Reviews from '@/components/Reviews/Reviews';
 import ContactForm from '@/components/ContactForm/ContactForm';
 
+// Hero images configuration
+const heroImages = [
+  {
+    url: '/cabinaerial2.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.4) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%)',
+  },
+  {
+    url: '/cabinback2.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.5) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%)',
+  },
+  {
+    url: '/cabinfront2.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.4) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%)',
+  },
+  {
+    url: '/cabinfront4.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.45) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.55) 100%)',
+  },
+  {
+    url: '/exterior1.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.4) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%)',
+  },
+  {
+    url: '/firepit1.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.45) 100%)',
+  },
+  {
+    url: '/firepit2.jpg',
+    gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 100%)',
+    mobileGradient: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.45) 100%)',
+  },
+];
+
 export default function Home() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Parallax effect
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 200], [1, 0.5]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 7000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentImage = heroImages[currentImageIndex] || heroImages[0];
 
   return (
     <Box>
@@ -56,34 +106,46 @@ export default function Home() {
               right: 0,
               bottom: 0,
               background: {
-                xs: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%)',
-                sm: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)'
+                xs: currentImage.mobileGradient,
+                sm: currentImage.gradient
               },
               zIndex: 1,
             },
           }}
         >
-          <motion.div
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '120%',
-              top: '-10%',
-              y,
-              opacity,
-            }}
-          >
-            <Box
-              sx={{
-                width: '100%',
-                height: '100%',
-                backgroundImage: 'url(/cabinaerial1.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: { xs: 'center 30%', sm: 'center' },
-                filter: { xs: 'brightness(0.9)', sm: 'none' },
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0 }}
+              animate={{ 
+                opacity: 1,
+                y: y,
               }}
-            />
-          </motion.div>
+              exit={{ opacity: 0 }}
+              transition={{ 
+                opacity: { duration: 1 },
+                y: { duration: 0 }
+              }}
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '120%',
+                top: '-10%',
+              }}
+            >
+              <Box
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  backgroundImage: `url(${currentImage.url})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: { xs: 'center 30%', sm: 'center' },
+                  filter: { xs: 'brightness(0.9)', sm: 'none' },
+                  transition: 'all 0.5s ease-in-out',
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
         </Box>
 
         {/* Hero Content */}
@@ -561,8 +623,8 @@ export default function Home() {
                     height: '100%',
                     transition: 'transform 0.2s',
                     '&:hover': {
-                      transform: 'translateY(-4px)',
-                    },
+                      transform: 'translateY(-4px)'
+                    }
                   }}
                 >
                   <Typography
@@ -586,8 +648,8 @@ export default function Home() {
                     height: '100%',
                     transition: 'transform 0.2s',
                     '&:hover': {
-                      transform: 'translateY(-4px)',
-                    },
+                      transform: 'translateY(-4px)'
+                    }
                   }}
                 >
                   <Typography
@@ -611,8 +673,8 @@ export default function Home() {
                     height: '100%',
                     transition: 'transform 0.2s',
                     '&:hover': {
-                      transform: 'translateY(-4px)',
-                    },
+                      transform: 'translateY(-4px)'
+                    }
                   }}
                 >
                   <Typography
