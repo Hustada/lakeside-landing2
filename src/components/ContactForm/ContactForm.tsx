@@ -4,7 +4,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Box, TextField, Button, Typography, Paper, Alert } from '@mui/material';
 import { Send as SendIcon } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import CampfireAnimation from './CampfireAnimation';
+
+// Initialize EmailJS
+const PUBLIC_KEY = 'LOfBCNYKVmwoQ10nV';
+emailjs.init(PUBLIC_KEY);
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,10 +18,38 @@ export default function ContactForm() {
     message: ''
   });
   const [showAnimation, setShowAnimation] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowAnimation(true);
+    setError('');
+
+    try {
+      await emailjs.send(
+        'service_7oes13r', // Lakeside Landing service
+        'template_6z9asrk', // Using the correct template
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          message: formData.message,
+          to_name: 'Lakeside Landing'
+        }
+      );
+      setShowAnimation(true);
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      
+      setTimeout(() => {
+        setShowAnimation(false);
+      }, 3000);
+    } catch (err) {
+      setError('Failed to send message. Please try again later.');
+      console.error('EmailJS error:', err);
+    }
   };
 
   const handleReset = () => {
@@ -182,6 +215,11 @@ export default function ContactForm() {
                 </Typography>
 
                 <form onSubmit={handleSubmit}>
+                  {error && (
+                    <Alert severity="error" sx={{ mb: 2 }}>
+                      {error}
+                    </Alert>
+                  )}
                   <motion.div
                     variants={inputVariants}
                     whileFocus="focus"
