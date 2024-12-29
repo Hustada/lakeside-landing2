@@ -21,7 +21,7 @@ export default function HeroTitle() {
           variant="h1"
           sx={{
             fontFamily: '"Cabin Sketch", cursive',
-            fontSize: { xs: '2.75rem', sm: '4rem', md: '5.5rem' },
+            fontSize: { xs: '3.5rem', sm: '4rem', md: '5.5rem' },
             fontWeight: 700,
             color: '#FDFBF7',
             textShadow: { 
