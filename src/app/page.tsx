@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Box, Container, Typography, Grid, Button, Paper } from '@mui/material';
-import { Fish, HomeIcon, Users } from 'lucide-react';
+import { Fish, HomeIcon, Users, Bird, Squirrel } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BookingModal from '@/components/BookingModal/BookingModal';
 import PhotoGallery from '@/components/PhotoGallery';
@@ -567,11 +567,7 @@ export default function Home() {
                   }}
                 >
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6B563C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M8 15V7c0-2.2 1.8-4 4-4s4 1.8 4 4v8"/>
-                      <path d="M17 15H7l-4 6h18l-4-6z"/>
-                      <path d="M12 3v4"/>
-                    </svg>
+                    <Squirrel size={48} style={{ color: '#6B563C' }} />
                     <Typography 
                       variant="h5" 
                       gutterBottom 
@@ -610,9 +606,7 @@ export default function Home() {
                   }}
                 >
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6B563C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 1 7.92 12.446a9 9 0 1 1 -16.626 -8.874a7.5 7.5 0 0 1 8.313 -3.572z"/>
-                    </svg>
+                    <Bird size={48} style={{ color: '#6B563C' }} />
                     <Typography 
                       variant="h5" 
                       gutterBottom 
