@@ -278,7 +278,7 @@ export default function ContactForm() {
                     backgroundColor: 'rgba(237, 247, 237, 0.9)',
                   }}
                 >
-                  Thank you for your message! We'll get back to you soon.
+                  Thank you for your message! We&apos;ll get back to you soon.
                 </Alert>
               </motion.div>
             )}
