@@ -271,7 +271,7 @@ export default function Home() {
             }}
             style={{
               position: 'absolute',
-              bottom: '40px',
+              bottom: '60px',
               cursor: 'pointer',
             }}
           >
