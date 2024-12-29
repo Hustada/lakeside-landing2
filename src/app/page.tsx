@@ -22,7 +22,24 @@ export default function Home() {
   return (
     <Box>
       {/* Hero Section */}
-      <Box sx={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+      <Box sx={{ 
+        position: 'relative', 
+        height: '100vh', 
+        overflow: 'hidden',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: { xs: '30%', sm: '0' },
+          background: {
+            xs: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%)',
+            sm: 'none'
+          },
+          zIndex: 1,
+        }
+      }}>
         {/* Hero Background */}
         <Box
           sx={{
@@ -38,7 +55,10 @@ export default function Home() {
               left: 0,
               right: 0,
               bottom: 0,
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)',
+              background: {
+                xs: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%)',
+                sm: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)'
+              },
               zIndex: 1,
             },
           }}
@@ -47,8 +67,8 @@ export default function Home() {
             style={{
               position: 'absolute',
               width: '100%',
-              height: '120%', // Extra height for movement
-              top: '-10%', // Start slightly above
+              height: '120%',
+              top: '-10%',
               y,
               opacity,
             }}
@@ -59,7 +79,8 @@ export default function Home() {
                 height: '100%',
                 backgroundImage: 'url(/cabinaerial1.jpg)',
                 backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundPosition: { xs: 'center 30%', sm: 'center' },
+                filter: { xs: 'brightness(0.9)', sm: 'none' },
               }}
             />
           </motion.div>
@@ -74,10 +95,11 @@ export default function Home() {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: { xs: 'flex-end', sm: 'center' },
             alignItems: 'center',
             textAlign: 'center',
             color: 'white',
+            pb: { xs: 12, sm: 0 },
           }}
         >
           <HeroTitle />
@@ -92,12 +114,12 @@ export default function Home() {
               size="large"
               onClick={() => setBookingModalOpen(true)}
               sx={{
-                mt: 6,
-                px: 6,
-                py: 2,
+                mt: { xs: 3, sm: 6 },
+                px: { xs: 4, sm: 6 },
+                py: { xs: 1.5, sm: 2 },
                 borderRadius: '28px',
                 textTransform: 'none',
-                fontSize: { xs: '1.1rem', md: '1.3rem' },
+                fontSize: { xs: '1rem', sm: '1.1rem', md: '1.3rem' },
                 fontFamily: '"Cabin Sketch", cursive',
                 fontWeight: 700,
                 letterSpacing: '0.05em',
@@ -142,11 +164,11 @@ export default function Home() {
       <Container 
         maxWidth="lg" 
         sx={{ 
-          py: { xs: 4, md: 6 },
+          py: { xs: 3, md: 6 },
           '& > div': {
             position: 'relative',
-            mb: { xs: 6, md: 8 },
-            pb: { xs: 6, md: 8 },
+            mb: { xs: 4, md: 8 },
+            pb: { xs: 4, md: 8 },
             '&:not(:last-child)': {
               '&::after': {
                 content: '""',
@@ -171,7 +193,7 @@ export default function Home() {
               textAlign: 'center',
               maxWidth: '800px',
               mx: 'auto',
-              mb: 8,
+              mb: { xs: 4, md: 8 },
             }}
           >
             <Typography
@@ -181,7 +203,7 @@ export default function Home() {
               sx={{
                 fontFamily: '"Cabin Sketch", cursive',
                 color: '#6B563C',
-                mb: 3,
+                mb: { xs: 2, md: 3 },
                 textShadow: '1px 1px 0 rgba(107, 86, 60, 0.1)',
               }}
             >

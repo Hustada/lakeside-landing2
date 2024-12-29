@@ -21,16 +21,21 @@ export default function HeroTitle() {
           variant="h1"
           sx={{
             fontFamily: '"Cabin Sketch", cursive',
-            fontSize: { xs: '3rem', sm: '4rem', md: '5.5rem' },
+            fontSize: { xs: '2.75rem', sm: '4rem', md: '5.5rem' },
             fontWeight: 700,
             color: '#FDFBF7',
-            textShadow: '2px 2px 0 #6B563C, 4px 4px 0 rgba(107, 86, 60, 0.6)',
+            textShadow: { 
+              xs: '1px 1px 0 #6B563C, 2px 2px 0 rgba(107, 86, 60, 0.6)',
+              sm: '2px 2px 0 #6B563C, 4px 4px 0 rgba(107, 86, 60, 0.6)'
+            },
             position: 'relative',
-            letterSpacing: '0.02em',
+            letterSpacing: { xs: '0.04em', sm: '0.02em' },
+            lineHeight: { xs: 1.2, sm: 'inherit' },
+            mb: { xs: 2, sm: 0 },
             '& .highlight': {
               color: '#D4C4B0',
               position: 'relative',
-              display: 'inline-block',
+              display: { xs: 'block', sm: 'inline-block' },
             },
             '&::before': {
               content: '""',
@@ -40,16 +45,16 @@ export default function HeroTitle() {
               right: '-2%',
               bottom: '-2%',
               background: 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' opacity=\'0.08\'/%3E%3C/svg%3E")',
-              opacity: 0.15,
+              opacity: { xs: 0.1, sm: 0.15 },
               zIndex: -1,
             },
             '&::after': {
               content: '""',
               position: 'absolute',
-              bottom: '-8px',
+              bottom: { xs: '-4px', sm: '-8px' },
               left: '0',
               width: '100%',
-              height: '4px',
+              height: { xs: '2px', sm: '4px' },
               background: 'linear-gradient(90deg, transparent, #8B6D47, transparent)',
               opacity: 0.6,
             }

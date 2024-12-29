@@ -101,7 +101,7 @@ export default function ContactForm() {
     <Box
       sx={{
         position: 'relative',
-        py: { xs: 8, md: 12 },
+        py: { xs: 4, md: 8 },
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -127,7 +127,7 @@ export default function ContactForm() {
           sx={{
             maxWidth: 600,
             mx: 'auto',
-            p: { xs: 3, md: 6 },
+            p: { xs: 2, md: 4 },
             borderRadius: '16px',
             backgroundColor: 'rgba(253, 251, 247, 0.95)',
             border: '2px solid #8B6D47',
@@ -144,7 +144,7 @@ export default function ContactForm() {
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.4 }}
               >
-                <Box sx={{ py: 4 }}>
+                <Box sx={{ py: { xs: 2, md: 4 } }}>
                   <Typography
                     variant="h5"
                     align="center"
@@ -152,13 +152,14 @@ export default function ContactForm() {
                     sx={{
                       fontFamily: '"Cabin Sketch", cursive',
                       color: '#6B563C',
-                      mb: 2,
+                      mb: { xs: 1, md: 2 },
+                      fontSize: { xs: '1.25rem', md: '1.5rem' },
                     }}
                   >
                     Message sent! Warming up by the fire...
                   </Typography>
                   <CampfireAnimation />
-                  <Box sx={{ textAlign: 'center', mt: 3 }}>
+                  <Box sx={{ textAlign: 'center', mt: { xs: 2, md: 3 } }}>
                     <Button
                       onClick={handleReset}
                       variant="outlined"

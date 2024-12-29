@@ -173,7 +173,7 @@ export default function PhotoGallery() {
 
   return (
     <>
-      <Box sx={{ width: '100%', mt: 4 }}>
+      <Box sx={{ width: '100%', mt: { xs: 2, md: 4 } }}>
         <Tabs 
           value={activeTab} 
           onChange={handleTabChange}
@@ -181,13 +181,14 @@ export default function PhotoGallery() {
           scrollButtons="auto"
           allowScrollButtonsMobile
           sx={{
-            mb: 3,
+            mb: { xs: 2, md: 3 },
             borderBottom: 1,
             borderColor: 'divider',
             '& .MuiTab-root': {
               textTransform: 'none',
               fontSize: { xs: '0.9rem', sm: '1rem' },
               minWidth: { xs: 'auto', sm: 200 },
+              py: { xs: 1, sm: 1.5 },
             },
           }}
         >
@@ -201,16 +202,17 @@ export default function PhotoGallery() {
             key={group.title}
             role="tabpanel"
             hidden={activeTab !== photoGroups.indexOf(group)}
-            sx={{ mb: 8 }}
+            sx={{ mb: { xs: 3, md: 6 } }}
           >
             {activeTab === photoGroups.indexOf(group) && (
               <>
                 <Typography 
                   variant="h5" 
                   sx={{ 
-                    mb: 1,
+                    mb: { xs: 1, md: 2 },
                     fontWeight: 500,
                     color: theme.palette.text.primary,
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
                   }}
                 >
                   {group.title}
@@ -218,22 +220,23 @@ export default function PhotoGallery() {
                 <Typography 
                   variant="body1" 
                   sx={{ 
-                    mb: 3,
+                    mb: { xs: 2, md: 3 },
                     color: theme.palette.text.secondary,
+                    fontSize: { xs: '0.875rem', md: '1rem' },
                   }}
                 >
                   {group.description}
                 </Typography>
                 <ImageList
-                  // Switch to standard grid for more predictable layout
                   variant="standard"
                   cols={isMobile ? 1 : 3}
                   gap={isMobile ? 8 : 16}
                   sx={{
+                    m: 0,
                     '& .MuiImageListItem-root': {
                       overflow: 'hidden',
                       borderRadius: 2,
-                      // Force consistent aspect ratio
+                      mb: { xs: 1, md: 2 },
                       '&::before': {
                         content: '""',
                         display: 'block',
@@ -251,7 +254,6 @@ export default function PhotoGallery() {
                       '&:hover img': {
                         transform: isMobile ? 'none' : 'scale(1.05)',
                       },
-                      // Improve tap target size on mobile
                       '&:active': {
                         opacity: isMobile ? 0.8 : 1,
                       },

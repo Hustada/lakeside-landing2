@@ -68,7 +68,7 @@ export default function Reviews() {
   };
 
   return (
-    <Box sx={{ py: 8, bgcolor: '#F5F1EC' }}>
+    <Box sx={{ py: { xs: 4, md: 8 }, bgcolor: '#F5F1EC' }}>
       <Container maxWidth="lg">
         <Typography
           variant="h4"
@@ -76,7 +76,7 @@ export default function Reviews() {
           align="center"
           gutterBottom
           sx={{
-            mb: 6,
+            mb: { xs: 3, md: 6 },
             fontFamily: '"Cabin Sketch", cursive',
             color: '#6B563C',
             textShadow: '1px 1px 0 rgba(107, 86, 60, 0.1)',
@@ -93,11 +93,11 @@ export default function Reviews() {
             '&::before': {
               content: '""',
               position: 'absolute',
-              top: -20,
+              top: { xs: -10, md: -20 },
               left: '50%',
               transform: 'translateX(-50%)',
               width: '100%',
-              height: 'calc(100% + 40px)',
+              height: { xs: 'calc(100% + 20px)', md: 'calc(100% + 40px)' },
               background: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.1) 1%, rgba(0,0,0,0.1) 99%, transparent 100%)',
               zIndex: 0,
             }
