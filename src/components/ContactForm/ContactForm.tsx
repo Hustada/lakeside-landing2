@@ -138,7 +138,7 @@ export default function ContactForm() {
                         borderRadius: '20px',
                         borderColor: '#8B6D47',
                         color: '#6B563C',
-                        fontFamily: '"Cabin", sans-serif',
+                        fontFamily: 'Cabin, sans-serif',
                         '&:hover': {
                           borderColor: '#6B563C',
                           backgroundColor: 'rgba(107, 86, 60, 0.05)',

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Typography, Rating, IconButton, Container } from '@mui/material';
+import { Box, Typography, IconButton, Container } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 

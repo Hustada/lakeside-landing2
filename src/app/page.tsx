@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Box, Container, Typography, Grid, Button, Paper } from '@mui/material';
-import { TreePine as Tree, Fish, Car, HomeIcon, Sun, Users, Tv } from 'lucide-react';
+import { Fish, HomeIcon, Users } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import BookingModal from '@/components/BookingModal/BookingModal';
 import PhotoGallery from '@/components/PhotoGallery';

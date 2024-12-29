@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Box, ImageList, ImageListItem, Modal, useMediaQuery, useTheme, IconButton, Typography, Tabs, Tab } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import Image from 'next/image';
 
 // Animation variants for photo transitions
 const variants = {
@@ -163,19 +164,19 @@ export default function PhotoGallery() {
             },
           }}
         >
-          {photoGroups.map((group, index) => (
+          {photoGroups.map((group) => (
             <Tab key={group.title} label={group.title} />
           ))}
         </Tabs>
 
-        {photoGroups.map((group, index) => (
+        {photoGroups.map((group) => (
           <Box
             key={group.title}
             role="tabpanel"
-            hidden={activeTab !== index}
+            hidden={activeTab !== photoGroups.indexOf(group)}
             sx={{ mb: 8 }}
           >
-            {activeTab === index && (
+            {activeTab === photoGroups.indexOf(group) && (
               <>
                 <Typography 
                   variant="h5" 
@@ -238,10 +239,17 @@ export default function PhotoGallery() {
                         cursor: 'pointer',
                       }}
                     >
-                      <img
+                      <Image
                         src={photo.img}
                         alt={photo.title}
                         loading="lazy"
+                        width={400}
+                        height={300}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
                       />
                     </ImageListItem>
                   ))}

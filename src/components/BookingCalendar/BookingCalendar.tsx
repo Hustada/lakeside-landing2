@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Paper, Typography, TextField } from '@mui/material';
+import { Box, Typography, TextField } from '@mui/material';
 import { motion } from 'framer-motion';
 
 interface BookingCalendarProps {
