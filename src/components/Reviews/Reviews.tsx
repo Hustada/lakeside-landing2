@@ -32,11 +32,22 @@ const reviews = [
     date: 'October 2023',
     text: 'The perfect escape from city life. The cabin was cozy and well-maintained. Spent hours by the fire pit watching stars.',
     highlight: 'Cozy retreat'
+  },
+  {
+    id: 4,
+    name: 'Turd Ferguson',
+    location: 'Wahoo',
+    rating: 1,
+    date: 'December 2023',
+    text: 'Stayed here and loved every moment! The rustic charm is off the charts—if you enjoy furniture that looks like it\'s been through a few adventures. Stunning lake views and peaceful nights, interrupted only by our new raccoon friends. Wi-Fi? Let\'s just say it\'s a great excuse to unplug and enjoy nature. Highly recommend for anyone seeking a unique getaway with plenty of character!',
+    highlight: 'Ding Dang!'
   }
 ];
 
-const StarIcon = () => (
-  <span style={{ color: '#8B6D47', fontSize: '1.2rem', marginRight: '2px' }}>★</span>
+const StarIcon = ({ filled }: { filled: boolean }) => (
+  <span style={{ color: filled ? '#8B6D47' : '#D4C4B0', fontSize: '1.2rem', marginRight: '2px' }}>
+    {filled ? '★' : '☆'}
+  </span>
 );
 
 export default function Reviews() {
@@ -48,6 +59,12 @@ export default function Reviews() {
 
   const prevReview = () => {
     setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
+  const renderStars = (rating: number) => {
+    return [...Array(5)].map((_, i) => (
+      <StarIcon key={i} filled={i < rating} />
+    ));
   };
 
   return (
@@ -116,9 +133,7 @@ export default function Reviews() {
               >
                 <Box sx={{ pl: 7 }}>
                   <Box sx={{ mb: 2, display: 'flex', gap: 0.5 }}>
-                    {Array.from({ length: reviews[currentReview].rating }).map((_, i) => (
-                      <StarIcon key={i} />
-                    ))}
+                    {renderStars(reviews[currentReview].rating)}
                   </Box>
 
                   <Typography

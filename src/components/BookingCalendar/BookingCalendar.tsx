@@ -1,140 +1,132 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Typography, TextField } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface BookingCalendarProps {
   onDateSelect: (startDate: Date | null, endDate: Date | null) => void;
 }
 
 export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) {
-  const [checkIn, setCheckIn] = useState<string>('');
-  const [checkOut, setCheckOut] = useState<string>('');
+  const [checkIn, setCheckIn] = useState<Dayjs | null>(null);
+  const [checkOut, setCheckOut] = useState<Dayjs | null>(null);
 
-  const handleCheckInChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const date = event.target.value;
+  const handleCheckInChange = (date: Dayjs | null) => {
     setCheckIn(date);
-    onDateSelect(date ? new Date(date) : null, checkOut ? new Date(checkOut) : null);
+    onDateSelect(date?.toDate() || null, checkOut?.toDate() || null);
   };
 
-  const handleCheckOutChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const date = event.target.value;
+  const handleCheckOutChange = (date: Dayjs | null) => {
     setCheckOut(date);
-    onDateSelect(checkIn ? new Date(checkIn) : null, date ? new Date(date) : null);
+    onDateSelect(checkIn?.toDate() || null, date?.toDate() || null);
   };
 
-  // Get today's date in YYYY-MM-DD format
-  const today = new Date().toISOString().split('T')[0];
+  const today = dayjs();
 
   return (
-    <Box sx={{ 
-      width: '100%', 
-      maxWidth: '800px',
-      margin: '0 auto',
-      '& .MuiTextField-root': {
-        '& input': {
-          fontSize: '1.2rem',
-          padding: '16px',
-        },
-        '& label': {
-          fontSize: '1.1rem',
-        }
-      }
-    }}>
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Box sx={{ 
-          display: 'flex', 
-          gap: 4,
-          flexDirection: { xs: 'column', sm: 'row' }
-        }}>
-          <TextField
-            label="Check-in Date"
-            type="date"
-            value={checkIn}
-            onChange={handleCheckInChange}
-            InputLabelProps={{ 
-              shrink: true,
-              sx: { 
-                color: 'primary.main',
-                '&.Mui-focused': {
-                  color: 'primary.dark'
-                }
-              }
-            }}
-            inputProps={{ 
-              min: today,
-              style: { cursor: 'pointer' }
-            }}
-            fullWidth
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: 'primary.main',
-                },
-                '&.Mui-focused fieldset': {
-                  borderWidth: 2,
-                },
-              },
-            }}
-          />
-          
-          <TextField
-            label="Check-out Date"
-            type="date"
-            value={checkOut}
-            onChange={handleCheckOutChange}
-            InputLabelProps={{ 
-              shrink: true,
-              sx: { 
-                color: 'primary.main',
-                '&.Mui-focused': {
-                  color: 'primary.dark'
-                }
-              }
-            }}
-            inputProps={{ 
-              min: checkIn || today,
-              style: { cursor: 'pointer' }
-            }}
-            fullWidth
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '&:hover fieldset': {
-                  borderColor: 'primary.main',
-                },
-                '&.Mui-focused fieldset': {
-                  borderWidth: 2,
-                },
-              },
-            }}
-          />
-        </Box>
-      </motion.div>
-
-      {checkIn && checkOut && (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Box sx={{ 
+        width: '100%', 
+        maxWidth: '800px',
+        margin: '0 auto',
+      }}>
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <Box sx={{ 
-            mt: 3, 
-            p: 2, 
-            bgcolor: 'primary.light',
-            borderRadius: 2,
-            color: 'primary.dark'
+            display: 'flex', 
+            gap: 4,
+            flexDirection: { xs: 'column', sm: 'row' }
           }}>
-            <Typography variant="h6" sx={{ fontWeight: 500 }}>
-              Selected Stay: {new Date(checkIn).toLocaleDateString()} - {new Date(checkOut).toLocaleDateString()}
-            </Typography>
+            <DatePicker
+              label="Check-in Date"
+              value={checkIn}
+              onChange={handleCheckInChange}
+              minDate={today}
+              sx={{
+                width: '100%',
+                '& .MuiOutlinedInput-root': {
+                  fontSize: '1.2rem',
+                  '& input': {
+                    padding: '16px',
+                    cursor: 'pointer',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'primary.main',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderWidth: 2,
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  fontSize: '1.1rem',
+                  color: 'primary.main',
+                  '&.Mui-focused': {
+                    color: 'primary.dark'
+                  }
+                }
+              }}
+            />
+            
+            <DatePicker
+              label="Check-out Date"
+              value={checkOut}
+              onChange={handleCheckOutChange}
+              minDate={checkIn || today}
+              sx={{
+                width: '100%',
+                '& .MuiOutlinedInput-root': {
+                  fontSize: '1.2rem',
+                  '& input': {
+                    padding: '16px',
+                    cursor: 'pointer',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: 'primary.main',
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderWidth: 2,
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  fontSize: '1.1rem',
+                  color: 'primary.main',
+                  '&.Mui-focused': {
+                    color: 'primary.dark'
+                  }
+                }
+              }}
+            />
           </Box>
         </motion.div>
-      )}
-    </Box>
+
+        {checkIn && checkOut && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <Box sx={{ 
+              mt: 3, 
+              p: 2, 
+              bgcolor: 'primary.light',
+              borderRadius: 2,
+              color: 'primary.dark'
+            }}>
+              <Typography variant="h6" sx={{ fontWeight: 500 }}>
+                Selected Stay: {checkIn.format('MM/DD/YYYY')} - {checkOut.format('MM/DD/YYYY')}
+              </Typography>
+            </Box>
+          </motion.div>
+        )}
+      </Box>
+    </LocalizationProvider>
   );
 }
