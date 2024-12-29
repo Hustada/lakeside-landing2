@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Box, Container, Typography, Grid, Button, Paper } from '@mui/material';
 import { Fish, HomeIcon, Users } from 'lucide-react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import BookingModal from '@/components/BookingModal/BookingModal';
 import PhotoGallery from '@/components/PhotoGallery';
 import ScrollSection from '@/components/ScrollSection/ScrollSection';
