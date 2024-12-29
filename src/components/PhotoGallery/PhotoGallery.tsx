@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Box, ImageList, ImageListItem, Modal, useMediaQuery, useTheme, IconButton } from '@mui/material';
+import { Box, ImageList, ImageListItem, Modal, useMediaQuery, useTheme, IconButton, Typography, Tabs, Tab } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
@@ -23,43 +23,97 @@ const variants = {
   })
 };
 
-// Organize photos into groups for better layout control
-const photos = [
-  { img: '/cabinaerial1.jpg', title: 'Aerial View of Property', span: 2 },
-  { img: '/cabinaerial2.jpg', title: 'Drone Shot of Lake', span: 1 },
-  { img: '/cabinfront2.jpg', title: 'Cabin Front View', span: 1 },
-  { img: '/cabinfront3.jpg', title: 'Cabin Entrance', span: 1 },
-  { img: '/cabinfront4.jpg', title: 'Front Porch', span: 1 },
-  { img: '/cabinfront5.jpg', title: 'Cabin Exterior', span: 2 },
-  { img: '/cabinback1.jpg', title: 'Back View', span: 1 },
-  { img: '/cabinback2.jpg', title: 'Lake View', span: 1 },
-  { img: '/cabinback3.jpg', title: 'Back Porch', span: 1 },
-  { img: '/cabinnight1.jpg', title: 'Night View', span: 2 },
-  { img: '/firepit1.jpg', title: 'Fire Pit', span: 1 },
-  { img: '/firepit2.jpg', title: 'Evening Fire', span: 1 },
+type PhotoGroup = {
+  title: string;
+  description: string;
+  photos: PhotoItem[];
+};
+
+type PhotoItem = {
+  img: string;
+  title: string;
+};
+
+// Organize photos into physical areas
+const photoGroups: PhotoGroup[] = [
+  {
+    title: "Property Overview",
+    description: "Aerial views and exterior perspectives of Lakeside Landing",
+    photos: [
+      { img: '/cabinaerial1.jpg', title: 'Aerial View of Property' },
+      { img: '/cabinaerial2.jpg', title: 'Drone Shot of Lake' },
+      { img: '/cabinfront2.jpg', title: 'Cabin Front View' },
+      { img: '/cabinfront3.jpg', title: 'Cabin Entrance' },
+      { img: '/cabinfront4.jpg', title: 'Front Porch' },
+      { img: '/cabinfront5.jpg', title: 'Cabin Exterior' },
+      { img: '/cabinnight1.jpg', title: 'Night View' },
+    ]
+  },
+  {
+    title: "Living Room",
+    description: "Spacious living area with lake views and comfortable seating",
+    photos: [
+      { img: '/livingroom1.jpg', title: 'Living Room Welcome' },
+      { img: '/livingroom2.jpg', title: 'Cozy Seating' },
+      { img: '/livingroom3.jpg', title: 'Living Space' },
+      { img: '/livingroom4.jpg', title: 'Gathering Space' },
+      { img: '/livingroom5.jpg', title: 'Living Area' },
+      { img: '/livingroom6.jpg', title: 'Lake View Inside' },
+      { img: '/livingroom7.jpg', title: 'Relaxation Space' },
+      { img: '/livingroom9.jpg', title: 'Cozy Corner' },
+      { img: '/livingroom10.jpg', title: 'Reading Nook' },
+    ]
+  },
+  {
+    title: "Kitchen & Dining",
+    description: "Modern kitchen and dining space for memorable meals",
+    photos: [
+      { img: '/cabinkitchen1.jpg', title: 'Modern Kitchen' },
+      { img: '/cabinkitchen2.jpg', title: 'Kitchen Details' },
+      { img: '/cabinkitchen4.jpg', title: 'Kitchen View' },
+      { img: '/cabinkitchen5.jpg', title: 'Kitchen Space' },
+      { img: '/cabindining1.jpg', title: 'Dining Area' },
+      { img: '/cabindining2.jpg', title: 'Dining Space' },
+    ]
+  },
+  {
+    title: "Outdoor Living",
+    description: "Lakefront views, back porch, and outdoor entertainment",
+    photos: [
+      { img: '/cabinback1.jpg', title: 'Back View' },
+      { img: '/cabinback2.jpg', title: 'Lake View' },
+      { img: '/cabinback3.jpg', title: 'Back Porch' },
+      { img: '/firepit1.jpg', title: 'Fire Pit' },
+      { img: '/firepit2.jpg', title: 'Evening Fire' },
+    ]
+  }
 ];
+
+// Flatten photos for modal navigation
+const allPhotos = photoGroups.flatMap(group => group.photos);
 
 export default function PhotoGallery() {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
   const [direction, setDirection] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // Get current photo index
-  const currentIndex = selectedImg ? photos.findIndex(photo => photo.img === selectedImg) : -1;
+  // Get current photo index from all photos
+  const currentIndex = selectedImg ? allPhotos.findIndex(photo => photo.img === selectedImg) : -1;
 
   // Navigation functions
   const showNext = useCallback(() => {
-    if (currentIndex < photos.length - 1) {
+    if (currentIndex < allPhotos.length - 1) {
       setDirection(1);
-      setSelectedImg(photos[currentIndex + 1].img);
+      setSelectedImg(allPhotos[currentIndex + 1].img);
     }
   }, [currentIndex]);
 
   const showPrev = useCallback(() => {
     if (currentIndex > 0) {
       setDirection(-1);
-      setSelectedImg(photos[currentIndex - 1].img);
+      setSelectedImg(allPhotos[currentIndex - 1].img);
     }
   }, [currentIndex]);
 
@@ -85,55 +139,117 @@ export default function PhotoGallery() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImg, showNext, showPrev]);
 
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
   return (
     <>
-      <Box sx={{ mt: 4 }}>
-        <ImageList
-          variant="masonry"
-          cols={isMobile ? 1 : 3}
-          gap={24}
+      <Box sx={{ width: '100%', mt: 4 }}>
+        <Tabs 
+          value={activeTab} 
+          onChange={handleTabChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          allowScrollButtonsMobile
           sx={{
-            mb: 8,
-            '& .MuiImageListItem-root': {
-              overflow: 'hidden',
-              borderRadius: 2,
-              '& img': {
-                transition: 'transform 0.3s ease-in-out',
-              },
-              '&:hover img': {
-                transform: 'scale(1.05)',
-              },
+            mb: 3,
+            borderBottom: 1,
+            borderColor: 'divider',
+            '& .MuiTab-root': {
+              textTransform: 'none',
+              fontSize: { xs: '0.9rem', sm: '1rem' },
+              minWidth: { xs: 'auto', sm: 200 },
             },
           }}
         >
-          {photos.map((photo) => (
-            <ImageListItem
-              key={photo.img}
-              component={motion.div}
-              cols={isMobile ? 1 : photo.span}
-              rows={1}
-              onClick={() => {
-                setDirection(0);
-                setSelectedImg(photo.img);
-              }}
-              sx={{ 
-                cursor: 'pointer',
-                aspectRatio: photo.span === 2 ? '16/9' : '4/3',
-              }}
-            >
-              <img
-                src={photo.img}
-                alt={photo.title}
-                loading="lazy"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
-              />
-            </ImageListItem>
+          {photoGroups.map((group, index) => (
+            <Tab key={group.title} label={group.title} />
           ))}
-        </ImageList>
+        </Tabs>
+
+        {photoGroups.map((group, index) => (
+          <Box
+            key={group.title}
+            role="tabpanel"
+            hidden={activeTab !== index}
+            sx={{ mb: 8 }}
+          >
+            {activeTab === index && (
+              <>
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    mb: 1,
+                    fontWeight: 500,
+                    color: theme.palette.text.primary,
+                  }}
+                >
+                  {group.title}
+                </Typography>
+                <Typography 
+                  variant="body1" 
+                  sx={{ 
+                    mb: 3,
+                    color: theme.palette.text.secondary,
+                  }}
+                >
+                  {group.description}
+                </Typography>
+                <ImageList
+                  // Switch to standard grid for more predictable layout
+                  variant="standard"
+                  cols={isMobile ? 2 : 3}
+                  gap={16}
+                  sx={{
+                    '& .MuiImageListItem-root': {
+                      overflow: 'hidden',
+                      borderRadius: 2,
+                      // Force consistent aspect ratio
+                      '&::before': {
+                        content: '""',
+                        display: 'block',
+                        paddingTop: '66.67%', // 3:2 aspect ratio
+                      },
+                      '& img': {
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        transition: 'transform 0.3s ease-in-out',
+                      },
+                      '&:hover img': {
+                        transform: 'scale(1.05)',
+                      },
+                    },
+                  }}
+                >
+                  {group.photos.map((photo) => (
+                    <ImageListItem
+                      key={photo.img}
+                      component={motion.div}
+                      onClick={() => {
+                        setDirection(0);
+                        setSelectedImg(photo.img);
+                      }}
+                      sx={{ 
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <img
+                        src={photo.img}
+                        alt={photo.title}
+                        loading="lazy"
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+              </>
+            )}
+          </Box>
+        ))}
       </Box>
 
       <Modal
@@ -148,7 +264,7 @@ export default function PhotoGallery() {
         }}
         onClick={() => setSelectedImg(null)}
       >
-        <AnimatePresence>
+        <AnimatePresence initial={false} custom={direction}>
           {selectedImg && (
             <Box
               onClick={(e) => e.stopPropagation()}
@@ -199,7 +315,7 @@ export default function PhotoGallery() {
                   },
                 }}
               >
-                <ChevronLeft size={32} />
+                <ChevronLeft size={24} />
               </IconButton>
 
               {/* Next Button */}
@@ -208,7 +324,7 @@ export default function PhotoGallery() {
                   e.stopPropagation();
                   showNext();
                 }}
-                disabled={currentIndex === photos.length - 1}
+                disabled={currentIndex === allPhotos.length - 1}
                 sx={{
                   position: 'absolute',
                   right: { xs: 2, md: 40 },
@@ -222,10 +338,10 @@ export default function PhotoGallery() {
                   },
                 }}
               >
-                <ChevronRight size={32} />
+                <ChevronRight size={24} />
               </IconButton>
 
-              <motion.div
+              <motion.img
                 key={selectedImg}
                 custom={direction}
                 variants={variants}
@@ -236,25 +352,16 @@ export default function PhotoGallery() {
                   x: { type: "spring", stiffness: 300, damping: 30 },
                   opacity: { duration: 0.2 }
                 }}
+                src={selectedImg}
+                alt={allPhotos.find(p => p.img === selectedImg)?.title}
                 style={{
-                  position: 'relative',
-                  maxWidth: '90vw',
+                  maxWidth: '100%',
                   maxHeight: '90vh',
-                  outline: 'none',
+                  objectFit: 'contain',
+                  borderRadius: '8px',
                 }}
-              >
-                <img
-                  src={selectedImg}
-                  alt={photos[currentIndex]?.title || "Selected"}
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '90vh',
-                    objectFit: 'contain',
-                    borderRadius: '8px',
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
-                  }}
-                />
-              </motion.div>
+                onClick={(e) => e.stopPropagation()}
+              />
             </Box>
           )}
         </AnimatePresence>
