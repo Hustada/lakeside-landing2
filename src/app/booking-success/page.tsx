@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Box, Typography, Container, CircularProgress, Button } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -190,7 +190,7 @@ const CampingAnimation = () => {
   );
 };
 
-export default function BookingSuccess() {
+const BookingSuccessContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
   const searchParams = useSearchParams();
@@ -198,10 +198,15 @@ export default function BookingSuccess() {
 
   useEffect(() => {
     const verifyBooking = async () => {
+      if (!sessionId) return;
+      
       try {
         const response = await fetch(`/api/verify-booking?session_id=${sessionId}`);
         const data = await response.json();
-        setBookingDetails(data);
+        
+        if (data.booking) {
+          setBookingDetails(data.booking);
+        }
       } catch (error) {
         console.error('Error verifying booking:', error);
       } finally {
@@ -209,14 +214,12 @@ export default function BookingSuccess() {
       }
     };
 
-    if (sessionId) {
-      verifyBooking();
-    }
+    verifyBooking();
   }, [sessionId]);
 
   if (isLoading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
         <CircularProgress />
       </Box>
     );
@@ -238,30 +241,7 @@ export default function BookingSuccess() {
         }}
       >
         <CampingAnimation />
-        
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Typography
-            variant="h2"
-            component="h1"
-            sx={{
-              fontFamily: '"Cabin Sketch", cursive',
-              color: '#2C1810',
-              mb: 2,
-            }}
-          >
-            Booking Confirmed!
-          </Typography>
-        </motion.div>
-
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
+        <Box>
           <Typography variant="h6" color="text.secondary" gutterBottom>
             Thank you for choosing Lakeside Landing!
           </Typography>
@@ -270,44 +250,41 @@ export default function BookingSuccess() {
           </Typography>
           {bookingDetails && (
             <Box sx={{ mt: 4 }}>
-              <Typography variant="body1">
-                Check-in: {new Date(bookingDetails.startDate).toLocaleDateString()}
-              </Typography>
-              <Typography variant="body1">
-                Check-out: {new Date(bookingDetails.endDate).toLocaleDateString()}
+              <Typography variant="body1" color="text.secondary">
+                Your stay: {bookingDetails.startDate} - {bookingDetails.endDate}
               </Typography>
             </Box>
           )}
-          
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
           >
-            <Link href="/" passHref style={{ textDecoration: 'none' }}>
+            <Link href="/" passHref>
               <Button
                 variant="contained"
                 sx={{
                   mt: 4,
-                  bgcolor: '#2C1810',
-                  color: 'white',
+                  bgcolor: 'primary.main',
                   '&:hover': {
-                    bgcolor: '#3D261C',
+                    bgcolor: 'primary.dark',
                   },
-                  px: 4,
-                  py: 1.5,
-                  borderRadius: 2,
-                  fontFamily: '"Cabin", sans-serif',
-                  textTransform: 'none',
-                  fontSize: '1.1rem',
                 }}
               >
                 Return Home
               </Button>
             </Link>
           </motion.div>
-        </motion.div>
+        </Box>
       </Box>
     </Container>
+  );
+};
+
+export default function BookingSuccess() {
+  return (
+    <Suspense fallback={<CircularProgress />}>
+      <BookingSuccessContent />
+    </Suspense>
   );
 }
