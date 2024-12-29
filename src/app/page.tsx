@@ -546,7 +546,7 @@ export default function Home() {
                       • Bluegill<br/>
                       • Channel Catfish<br/>
                       • Great Blue Herons<br/>
-                      • Wood Ducks
+                      • Orca Pods
                     </Typography>
                   </Box>
                 </Paper>
@@ -588,7 +588,8 @@ export default function Home() {
                       • Wild Turkeys<br/>
                       • Red Fox<br/>
                       • Eastern Cottontails<br/>
-                      • Gray Squirrels
+                      • Gray Squirrels<br/>
+                      • Yeti
                     </Typography>
                   </Box>
                 </Paper>
@@ -628,7 +629,7 @@ export default function Home() {
                       • Blue Jays<br/>
                       • Chickadees<br/>
                       • Woodpeckers<br/>
-                      • Goldfinches
+                      • Bald Eagles(Yay America!)
                     </Typography>
                   </Box>
                 </Paper>
