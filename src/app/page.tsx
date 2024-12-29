@@ -9,6 +9,7 @@ import PhotoGallery from '@/components/PhotoGallery';
 import ScrollSection from '@/components/ScrollSection/ScrollSection';
 import HeroTitle from '@/components/Hero/HeroTitle';
 import Reviews from '@/components/Reviews/Reviews';
+import ContactForm from '@/components/ContactForm/ContactForm';
 
 export default function Home() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -141,11 +142,11 @@ export default function Home() {
       <Container 
         maxWidth="lg" 
         sx={{ 
-          py: { xs: 8, md: 12 },
+          py: { xs: 4, md: 6 },
           '& > div': {
             position: 'relative',
-            mb: { xs: 10, md: 16 },
-            pb: { xs: 10, md: 16 },
+            mb: { xs: 6, md: 8 },
+            pb: { xs: 6, md: 8 },
             '&:not(:last-child)': {
               '&::after': {
                 content: '""',
@@ -158,13 +159,6 @@ export default function Home() {
                 background: 'linear-gradient(90deg, transparent, #D4C4B0 50%, transparent)',
                 opacity: 0.8,
                 boxShadow: '0 1px 2px rgba(139, 109, 71, 0.1)'
-              }
-            },
-            '&:last-child': {
-              mb: 0,
-              pb: 0,
-              '&::after': {
-                display: 'none'
               }
             }
           }
@@ -464,8 +458,12 @@ export default function Home() {
         </ScrollSection>
 
         {/* Reviews Section */}
-        <ScrollSection delay={0.8}>
+        <ScrollSection delay={0.2}>
           <Reviews />
+        </ScrollSection>
+
+        <ScrollSection delay={0.2}>
+          <ContactForm />
         </ScrollSection>
       </Container>
 
