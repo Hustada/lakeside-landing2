@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create-stripe-product": "node -r dotenv/config scripts/create-stripe-product.js",
+    "list-stripe-prices": "node -r dotenv/config scripts/list-stripe-prices.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -18,6 +20,7 @@
     "@mui/material": "^6.3.0",
     "@mui/x-date-pickers": "^7.23.3",
     "@prisma/client": "^6.1.0",
+    "@stripe/stripe-js": "^5.4.0",
     "@tanstack/react-query": "^5.62.11",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
@@ -38,8 +41,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.4.7",
     "eslint": "^9",
     "eslint-config-next": "15.1.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

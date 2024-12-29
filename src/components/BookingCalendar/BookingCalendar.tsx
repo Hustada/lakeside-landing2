@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
+import { getStripe } from '@/lib/stripe-client';
+import logger from '@/utils/logger';
 
 interface BookingCalendarProps {
   onDateSelect: (startDate: Date | null, endDate: Date | null) => void;
@@ -15,15 +17,78 @@ interface BookingCalendarProps {
 export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) {
   const [checkIn, setCheckIn] = useState<Dayjs | null>(null);
   const [checkOut, setCheckOut] = useState<Dayjs | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCheckInChange = (date: Dayjs | null) => {
+    logger.info('Check-in date selected', { date: date?.format('YYYY-MM-DD') });
     setCheckIn(date);
     onDateSelect(date?.toDate() || null, checkOut?.toDate() || null);
   };
 
   const handleCheckOutChange = (date: Dayjs | null) => {
+    logger.info('Check-out date selected', { date: date?.format('YYYY-MM-DD') });
     setCheckOut(date);
     onDateSelect(checkIn?.toDate() || null, date?.toDate() || null);
+  };
+
+  const handleCheckout = async () => {
+    if (!checkIn || !checkOut) {
+      logger.warn('Attempted checkout without dates selected');
+      alert('Please select both check-in and check-out dates');
+      return;
+    }
+
+    logger.info('Starting checkout process', {
+      checkIn: checkIn.format('YYYY-MM-DD'),
+      checkOut: checkOut.format('YYYY-MM-DD'),
+    });
+
+    setIsLoading(true);
+    try {
+      // Create the checkout session first
+      logger.debug('Creating checkout session');
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          startDate: checkIn.format('YYYY-MM-DD'),
+          endDate: checkOut.format('YYYY-MM-DD'),
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error?.message || 'Failed to create checkout session');
+      }
+
+      logger.info('Checkout session created', { sessionId: data.sessionId });
+
+      // Then initialize Stripe and redirect
+      logger.debug('Initializing Stripe');
+      const stripe = await getStripe();
+
+      // Redirect to Stripe checkout
+      logger.debug('Redirecting to Stripe checkout');
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: data.sessionId,
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (error: any) {
+      logger.error('Checkout process failed', {
+        error: error.message,
+        stack: error.stack,
+      });
+      console.error('Checkout error:', error);
+      alert(error.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const today = dayjs();
@@ -110,6 +175,24 @@ export default function BookingCalendar({ onDateSelect }: BookingCalendarProps) 
               }}
             />
           </Box>
+          {checkIn && checkOut && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+              <Button
+                variant="contained"
+                onClick={handleCheckout}
+                disabled={isLoading}
+                sx={{
+                  bgcolor: '#2C1810',
+                  color: 'white',
+                  '&:hover': {
+                    bgcolor: '#3D2415',
+                  },
+                }}
+              >
+                {isLoading ? 'Processing...' : 'Proceed to Checkout'}
+              </Button>
+            </Box>
+          )}
         </motion.div>
 
         {checkIn && checkOut && (
