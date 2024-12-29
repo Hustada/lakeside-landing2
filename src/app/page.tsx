@@ -338,7 +338,7 @@ export default function Home() {
         <Container 
           maxWidth="lg" 
           sx={{ 
-            py: { xs: 3, md: 6 },
+            py: { xs: 6, md: 10 },
             '& > div': {
               position: 'relative',
               mb: { xs: 4, md: 8 },
